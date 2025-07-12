@@ -7,6 +7,9 @@ import  {movies} from '../moives/db';
 // }
 
 export const POST =async (req : Request)=>{
+    let movie = await req.json();
+    console.log(movie);
+
     
 
 }
