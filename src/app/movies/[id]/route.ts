@@ -20,3 +20,47 @@ export const GET= async (_req : Request, { params }: Params)=>{
 
 
 };
+
+
+export  const PATCH = async(req : Request, {params}: Params)=>{
+
+    const {id} = params;
+    const movieId = +id;
+
+  const  movie =   movies.find((m) => m.id === movieId);
+
+  if(!movie){
+    return new Response("Movies not found", {status : 404});
+
+  }
+  
+  try{
+
+    const updateMovie = await req.json();
+    const index = movies.findIndex((m)=> m.id === movieId);
+    if(!movie){
+    return new Response("Movies not found", {status : 404});
+
+  }
+
+  // update the movies;
+
+  movies[index] =  {...movie, ...updateMovie};
+  return new Response(JSON.stringify(movies[index]), {status: 200});
+
+
+
+
+  }catch(error){
+    return new Response(JSON.stringify( {error: "failed to parse the json "}), {status : 404});
+  }
+
+  
+
+
+    
+
+
+
+
+}
